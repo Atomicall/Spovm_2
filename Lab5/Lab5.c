@@ -106,7 +106,7 @@ void* fReader(void* param){
     semctl(sem_id, 2, SETVAL, 1); // как только установим, writer завершится
 
 
-    //добавляем к адресному пространству
+    //отделяем от адр пространства
     shmdt (shMem);
     closedir(dir);
     return NULL;
@@ -153,6 +153,7 @@ void* fWriter(void* atr){
             semctl(sem_id, 0, SETVAL, 0);
         }
     }
+    //отделяем от адр пространства
     shmdt (shMem);
     return NULL;
 }
